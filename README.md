@@ -2,7 +2,15 @@
 
 **A SOC Analyst-Focused Security Information and Event Management System**
 
-CyberDucky Mini SIEM is a full-stack web application designed specifically for Security Operations Center (SOC) analysts to analyze Zscaler NSS Web Logs with advanced threat detection, anomaly analysis, and AI-powered insights.
+CyberDucky Mini SIEM is a full-stack web application designed specifically for Security Operations Center (SOC) analysts to analyze Zscaler NSS Web Logs, (ANY LOGS) with advanced threat detection, anomaly analysis, and AI-powered insights.
+
+
+<img width="1912" height="901" alt="Screenshot 2025-12-29 131720" src="https://github.com/user-attachments/assets/6b2a745e-67fa-476a-9e88-ec6b1f27b1d9" />
+
+<img width="1772" height="902" alt="Screenshot 2025-12-29 131818" src="https://github.com/user-attachments/assets/8afef323-1550-4755-949c-0d19b73b0996" />
+<img width="1910" height="895" alt="Screenshot 2025-12-29 131832" src="https://github.com/user-attachments/assets/701a62d7-527c-40e0-993d-c46c1eb84152" />
+<img width="1905" height="896" alt="Screenshot 2025-12-29 131849" src="https://github.com/user-attachments/assets/a5b429c6-12c6-41b4-af19-6257e3af4eb1" />
+<img width="1785" height="880" alt="Screenshot 2025-12-29 132025" src="https://github.com/user-attachments/assets/e078d48c-805a-40b0-a537-4cc4d9054af2" />
 
 ---
 
