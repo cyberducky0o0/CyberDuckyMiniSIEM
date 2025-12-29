@@ -6,7 +6,6 @@ import {
   Activity,
   Globe,
   Users,
-  UserCheck,
   Ban,
   CheckCircle,
   TrendingUp,
@@ -16,7 +15,7 @@ import MetricsCard from './MetricsCard';
 import DataTableModal from './DataTableModal';
 import LogEntryDetails from './LogEntryDetails';
 import { anomalyApi, logEntriesApi } from '../services/api';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface MetricsOverviewProps {
   statistics: {
@@ -46,7 +45,7 @@ interface MetricsOverviewProps {
   logFile: {
     id: string;
     created_at: string;
-    processed_at?: string;
+    processed_at?: string | null;
   };
 }
 

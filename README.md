@@ -13,13 +13,14 @@ CyberDucky Mini SIEM is a full-stack web application designed specifically for S
 3. [Architecture](#architecture)
 4. [Technology Stack](#technology-stack)
 5. [Quick Start](#quick-start)
-6. [How It Works](#how-it-works)
-7. [Design Decisions](#design-decisions)
-8. [Parser Architecture](#parser-architecture)
-9. [Anomaly Detection](#anomaly-detection)
-10. [API Reference](#api-reference)
-11. [Development](#development)
-12. [Documentation](#documentation)
+6. [Production Deployment](#-production-deployment)
+7. [How It Works](#how-it-works)
+8. [Design Decisions](#design-decisions)
+9. [Parser Architecture](#parser-architecture)
+10. [Anomaly Detection](#anomaly-detection)
+11. [API Reference](#api-reference)
+12. [Development](#development)
+13. [Documentation](#documentation)
 
 ---
 
@@ -163,7 +164,7 @@ CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
 
 ---
 
-## í²» Technology Stack
+## ï¿½ï¿½ï¿½ Technology Stack
 
 ### Backend
 
@@ -201,7 +202,7 @@ CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
 
 ---
 
-## íº€ Quick Start
+## ï¿½ï¿½ï¿½ Quick Start
 
 ### Prerequisites
 
@@ -266,7 +267,217 @@ See [Sample Data Guide](documentation/guides/SAMPLE_DATA.md) for details.
 
 ---
 
-## í´§ How It Works
+## ðŸš€ Production Deployment
+
+### Prerequisites
+
+- **Docker** and **Docker Compose** installed
+- **Ollama** installed and running (for AI features)
+- **Domain name** (optional, for SSL/HTTPS)
+- **8GB RAM** minimum (16GB recommended)
+- **20GB disk space** for logs, database, and Docker images
+
+### Production Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd CyberDuckyMiniSIEM
+   ```
+
+2. **Configure environment variables**
+
+   Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+   Edit `.env` and set **all required variables**:
+   ```bash
+   # Database Configuration
+   POSTGRES_USER=cyberducky_admin
+   POSTGRES_PASSWORD=<GENERATE_STRONG_PASSWORD>
+   POSTGRES_DB=cyberducky_siem
+   DATABASE_URL=postgresql://cyberducky_admin:<PASSWORD>@db:5432/cyberducky_siem
+
+   # Security - CRITICAL: Generate strong random secrets!
+   SECRET_KEY=<GENERATE_64_CHAR_RANDOM_STRING>
+   JWT_SECRET_KEY=<GENERATE_64_CHAR_RANDOM_STRING>
+
+   # Ollama Configuration
+   OLLAMA_URL=http://host.docker.internal:11434
+   OLLAMA_DEFAULT_MODEL=phi3:mini
+   LLM_ENABLED=true
+
+   # Application
+   FLASK_ENV=production
+   VITE_API_URL=http://your-domain.com/api
+   ```
+
+   **âš ï¸ SECURITY WARNING:**
+   - **NEVER** use default passwords in production
+   - **NEVER** commit `.env` file to version control
+   - Generate secrets using: `openssl rand -hex 32`
+
+3. **Start Ollama and pull the model**
+   ```bash
+   ollama serve
+   ollama pull phi3:mini
+   ```
+
+4. **Build and start the application**
+   ```bash
+   docker-compose -f docker-compose.prod.yml up -d --build
+   ```
+
+5. **Verify deployment**
+   ```bash
+   # Check all containers are running
+   docker-compose -f docker-compose.prod.yml ps
+
+   # Check backend logs
+   docker-compose -f docker-compose.prod.yml logs backend
+
+   # Check frontend logs
+   docker-compose -f docker-compose.prod.yml logs frontend
+   ```
+
+6. **Access the application**
+   - Frontend: http://your-domain.com
+   - Backend API: http://your-domain.com/api
+   - Health check: http://your-domain.com/api/health
+
+### SSL/HTTPS Configuration
+
+For production, you should enable HTTPS using Let's Encrypt:
+
+1. **Install Certbot**
+   ```bash
+   sudo apt-get install certbot python3-certbot-nginx
+   ```
+
+2. **Obtain SSL certificate**
+   ```bash
+   sudo certbot --nginx -d your-domain.com
+   ```
+
+3. **Update nginx configuration**
+
+   Edit `nginx/nginx.conf` to add SSL configuration:
+   ```nginx
+   server {
+       listen 443 ssl http2;
+       server_name your-domain.com;
+
+       ssl_certificate /etc/letsencrypt/live/your-domain.com/fullchain.pem;
+       ssl_certificate_key /etc/letsencrypt/live/your-domain.com/privkey.pem;
+
+       # ... rest of configuration
+   }
+   ```
+
+4. **Mount SSL certificates in docker-compose.prod.yml**
+   ```yaml
+   nginx:
+     volumes:
+       - /etc/letsencrypt:/etc/letsencrypt:ro
+   ```
+
+### Production Security Checklist
+
+- [ ] Changed all default passwords
+- [ ] Generated strong SECRET_KEY and JWT_SECRET_KEY
+- [ ] Configured HTTPS/SSL
+- [ ] Set up firewall rules (allow only 80, 443)
+- [ ] Enabled Docker logging
+- [ ] Set up backup strategy for PostgreSQL
+- [ ] Configured log rotation
+- [ ] Reviewed CORS settings in backend
+- [ ] Set up monitoring/alerting
+- [ ] Documented incident response procedures
+
+### Backup and Restore
+
+**Backup PostgreSQL database:**
+```bash
+docker-compose -f docker-compose.prod.yml exec db pg_dump -U cyberducky_admin cyberducky_siem > backup_$(date +%Y%m%d).sql
+```
+
+**Restore from backup:**
+```bash
+docker-compose -f docker-compose.prod.yml exec -T db psql -U cyberducky_admin cyberducky_siem < backup_20240101.sql
+```
+
+**Backup uploaded files:**
+```bash
+docker cp cyberduckymini siem-backend-1:/app/uploads ./uploads_backup
+```
+
+### Monitoring
+
+**View logs:**
+```bash
+# All services
+docker-compose -f docker-compose.prod.yml logs -f
+
+# Specific service
+docker-compose -f docker-compose.prod.yml logs -f backend
+docker-compose -f docker-compose.prod.yml logs -f nginx
+```
+
+**Check resource usage:**
+```bash
+docker stats
+```
+
+**Health checks:**
+```bash
+# Backend health
+curl http://localhost/api/health
+
+# Database connection
+docker-compose -f docker-compose.prod.yml exec db psql -U cyberducky_admin -d cyberducky_siem -c "SELECT 1;"
+```
+
+### Scaling
+
+To scale the backend for high load:
+
+```bash
+docker-compose -f docker-compose.prod.yml up -d --scale backend=3
+```
+
+**Note:** You'll need to configure nginx load balancing for multiple backend instances.
+
+### Troubleshooting
+
+**Backend won't start:**
+```bash
+# Check environment variables
+docker-compose -f docker-compose.prod.yml exec backend env | grep -E "SECRET_KEY|DATABASE_URL"
+
+# Check database connection
+docker-compose -f docker-compose.prod.yml exec backend python -c "from app import create_app; app = create_app('production')"
+```
+
+**Frontend build fails:**
+```bash
+# Rebuild frontend
+docker-compose -f docker-compose.prod.yml build --no-cache frontend
+```
+
+**Database connection errors:**
+```bash
+# Check database is running
+docker-compose -f docker-compose.prod.yml ps db
+
+# Check database logs
+docker-compose -f docker-compose.prod.yml logs db
+```
+
+---
+
+## ï¿½ï¿½ï¿½ How It Works
 
 ### 1. Log Upload and Parsing
 
@@ -543,7 +754,7 @@ Click on "john.doe" â†’ Navigate to /unified-analysis?username=john.doe
 
 ---
 
-## í¾¨ Design Decisions
+## ï¿½ï¿½ï¿½ Design Decisions
 
 ### Why These 4 Statistical Methods?
 
@@ -596,7 +807,7 @@ Click on "john.doe" â†’ Navigate to /unified-analysis?username=john.doe
 ---
 
 
-## í´ Parser Architecture
+## ï¿½ï¿½ï¿½ Parser Architecture
 
 ### Overview
 
@@ -675,7 +886,7 @@ See [Parser Guide](documentation/guides/PARSER_GUIDE.md) for complete field mapp
 
 ---
 
-## í´– Anomaly Detection
+## ï¿½ï¿½ï¿½ Anomaly Detection
 
 ### Detection Methods
 
@@ -840,7 +1051,7 @@ See [Anomaly Detection Guide](documentation/guides/ANOMALY_DETECTION.md) for det
 
 ---
 
-## í³¡ API Reference
+## ï¿½ï¿½ï¿½ API Reference
 
 ### Authentication
 
@@ -969,7 +1180,7 @@ Response: 200 OK
 
 ---
 
-## í» ï¸ Development
+## ï¿½ï¿½ï¿½ï¸ Development
 
 ### Project Structure
 
@@ -1110,7 +1321,7 @@ VITE_API_URL=http://localhost:5000/api
 
 ---
 
-## í³š Documentation
+## ï¿½ï¿½ï¿½ Documentation
 
 ### Available Guides
 
@@ -1140,7 +1351,7 @@ VITE_API_URL=http://localhost:5000/api
 
 ---
 
-## í´’ Security Considerations
+## ï¿½ï¿½ï¿½ Security Considerations
 
 ### Authentication & Authorization
 
@@ -1164,13 +1375,13 @@ VITE_API_URL=http://localhost:5000/api
 
 ---
 
-## í³ License
+## ï¿½ï¿½ï¿½ License
 
 This project is for educational and internal use. See LICENSE file for details.
 
 ---
 
-## í¹ Acknowledgments
+## ï¿½ï¿½ï¿½ Acknowledgments
 
 - **Zscaler** - For NSS Web Log format documentation
 - **Ollama** - For local LLM inference
@@ -1179,7 +1390,7 @@ This project is for educational and internal use. See LICENSE file for details.
 
 ---
 
-## í³§ Support
+## ï¿½ï¿½ï¿½ Support
 
 For questions or issues:
 1. Check the [documentation](documentation/)

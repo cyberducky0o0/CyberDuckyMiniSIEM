@@ -14,7 +14,7 @@ import {
 
 const UnifiedAnalysis: React.FC = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { } = useAuth();
   const [searchParams] = useSearchParams();
   
   const [data, setData] = useState<any>(null);
@@ -72,7 +72,7 @@ const UnifiedAnalysis: React.FC = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-slate-900">
-        <NavigationBar user={user} onLogout={logout} />
+        <NavigationBar />
         <main className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center h-64">
             <div className="text-white text-xl">Loading unified analysis...</div>
@@ -85,7 +85,7 @@ const UnifiedAnalysis: React.FC = () => {
   if (!data) {
     return (
       <div className="min-h-screen bg-slate-900">
-        <NavigationBar user={user} onLogout={logout} />
+        <NavigationBar />
         <main className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center h-64">
             <div className="text-white text-xl">No data available</div>
@@ -97,7 +97,7 @@ const UnifiedAnalysis: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-900">
-      <NavigationBar user={user} onLogout={logout} />
+      <NavigationBar />
       
       <main className="container mx-auto px-4 py-8">
         {/* Header */}

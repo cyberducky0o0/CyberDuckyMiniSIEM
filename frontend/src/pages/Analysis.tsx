@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { analysisApi, anomalyApi, visualizationApi } from '../services/api';
+import { analysisApi, visualizationApi } from '../services/api';
 import {
   ArrowLeft,
   AlertTriangle,
   Shield,
   Activity,
   Users,
-  Globe,
-  TrendingUp,
   FileText,
   AlertCircle,
   RefreshCw,
 } from 'lucide-react';
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import type { AnalysisResponse, Anomaly } from '../types';
+import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import type { AnalysisResponse } from '../types';
 import MetricsOverview from '../components/MetricsOverview';
 import {
   RiskTrendlineWidget,
@@ -114,7 +112,7 @@ const Analysis: React.FC = () => {
     );
   }
 
-  const { statistics, anomaly_statistics, timeline, critical_anomalies } = analysis;
+  const { statistics, anomaly_statistics } = analysis;
 
   // Prepare chart data
   const severityData = [
@@ -128,31 +126,6 @@ const Analysis: React.FC = () => {
     name: cat.category.length > 20 ? cat.category.substring(0, 20) + '...' : cat.category,
     count: cat.count,
   }));
-
-  const timelineData = timeline.slice(0, 20).map(event => ({
-    time: new Date(event.timestamp).toLocaleTimeString(),
-    severity: event.severity,
-  }));
-
-  const getSeverityColor = (severity: string) => {
-    const colors = {
-      critical: 'text-danger-400 bg-danger-900 border-danger-700',
-      high: 'text-warning-400 bg-warning-900 border-warning-700',
-      medium: 'text-yellow-400 bg-yellow-900 border-yellow-700',
-      low: 'text-success-400 bg-success-900 border-success-700',
-    };
-    return colors[severity as keyof typeof colors] || 'text-gray-400 bg-gray-900 border-gray-700';
-  };
-
-  const getSeverityBadge = (severity: string) => {
-    const badges = {
-      critical: 'badge-critical',
-      high: 'badge-high',
-      medium: 'badge-medium',
-      low: 'badge-low',
-    };
-    return badges[severity as keyof typeof badges] || 'badge';
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">

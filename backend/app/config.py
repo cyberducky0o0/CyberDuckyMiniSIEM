@@ -29,6 +29,18 @@ class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_ECHO = False
+    # Production security settings
+    SECRET_KEY = os.getenv('SECRET_KEY')  # Must be set in production
+    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')  # Must be set in production
+
+    # Validate required environment variables
+    @classmethod
+    def validate(cls):
+        """Validate that required environment variables are set"""
+        required_vars = ['DATABASE_URL', 'SECRET_KEY', 'JWT_SECRET_KEY']
+        missing = [var for var in required_vars if not os.getenv(var)]
+        if missing:
+            raise ValueError(f"Missing required environment variables: {', '.join(missing)}")
 
 config = {
     'development': DevelopmentConfig,

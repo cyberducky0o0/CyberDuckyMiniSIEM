@@ -34,7 +34,7 @@ import {
 
 const OverviewDashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { } = useAuth();
   const [overview, setOverview] = useState<any>(null);
   const [anomalyTrends, setAnomalyTrends] = useState<any>(null);
   const [topThreats, setTopThreats] = useState<any>(null);
@@ -363,7 +363,7 @@ const OverviewDashboard: React.FC = () => {
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                    label={(entry: any) => `${entry.name}: ${(entry.percent * 100).toFixed(0)}%`}
                     outerRadius={100}
                     fill="#8884d8"
                     dataKey="value"

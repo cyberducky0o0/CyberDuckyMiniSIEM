@@ -8,15 +8,15 @@ import type { LogFile } from '../types';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { logout: _logout } = useAuth();
   const [logFiles, setLogFiles] = useState<LogFile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadError, setUploadError] = useState('');
-  const [uploadSuccess, setUploadSuccess] = useState('');
+  const [_isUploading, _setIsUploading] = useState(false);
+  const [_uploadError, _setUploadError] = useState('');
+  const [_uploadSuccess, _setUploadSuccess] = useState('');
   const [reprocessingId, setReprocessingId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
-  const [selectedLogType, setSelectedLogType] = useState<string>('zscaler');
+  const [_selectedLogType, _setSelectedLogType] = useState<string>('zscaler');
 
   useEffect(() => {
     loadLogFiles();
@@ -33,52 +33,19 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setIsUploading(true);
-    setUploadError('');
-    setUploadSuccess('');
-
-    try {
-      const response = await uploadApi.uploadLogFile(file, selectedLogType);
-      setUploadSuccess(`Successfully uploaded ${file.name}!`);
-      
-      // Reload log files
-      await loadLogFiles();
-      
-      // Navigate to analysis page after a short delay
-      setTimeout(() => {
-        navigate(`/analysis/${response.log_file.id}`);
-      }, 1500);
-    } catch (error: any) {
-      setUploadError(error.response?.data?.error || 'Failed to upload file. Please try again.');
-    } finally {
-      setIsUploading(false);
-      // Reset file input
-      e.target.value = '';
-    }
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
-
   const handleReprocess = async (fileId: string) => {
     setReprocessingId(fileId);
-    setUploadError('');
-    setUploadSuccess('');
+    _setUploadError('');
+    _setUploadSuccess('');
 
     try {
       await uploadApi.reprocessLogFile(fileId);
-      setUploadSuccess('File reprocessed successfully!');
+      _setUploadSuccess('File reprocessed successfully!');
 
       // Reload log files to show updated stats
       await loadLogFiles();
     } catch (error: any) {
-      setUploadError(error.response?.data?.error || 'Failed to reprocess file. Please try again.');
+      _setUploadError(error.response?.data?.error || 'Failed to reprocess file. Please try again.');
     } finally {
       setReprocessingId(null);
     }
@@ -90,17 +57,17 @@ const Dashboard: React.FC = () => {
     }
 
     setDeletingId(fileId);
-    setUploadError('');
-    setUploadSuccess('');
+    _setUploadError('');
+    _setUploadSuccess('');
 
     try {
       await uploadApi.deleteLogFile(fileId);
-      setUploadSuccess(`Successfully deleted ${filename}!`);
+      _setUploadSuccess(`Successfully deleted ${filename}!`);
 
       // Reload log files
       await loadLogFiles();
     } catch (error: any) {
-      setUploadError(error.response?.data?.error || 'Failed to delete file. Please try again.');
+      _setUploadError(error.response?.data?.error || 'Failed to delete file. Please try again.');
     } finally {
       setDeletingId(null);
     }

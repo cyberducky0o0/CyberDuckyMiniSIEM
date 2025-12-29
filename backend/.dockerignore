@@ -1,0 +1,72 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads (will be in volume)
+uploads/*
+!uploads/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+tests/
+test_*.py
+
+# Documentation
+documentation/
+*.md
+!README.md
+
+# Scripts (keep only essential ones)
+scripts/test_*.py
+scripts/generate_*.py
+
+# Migrations versions (will be created in container)
+migrations/versions/*
+!migrations/versions/.gitkeep
+
+# Sample data (not needed in production)
+sample_data/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# OS
+Thumbs.db
+.DS_Store
+
