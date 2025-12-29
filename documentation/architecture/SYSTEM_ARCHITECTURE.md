@@ -7,52 +7,52 @@ CyberDucky Mini SIEM is a full-stack web application built with a modern, scalab
 ## High-Level Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    Client (Browser)                          │
-│                  React + TypeScript                          │
-└────────────────────┬────────────────────────────────────────┘
-                     │ HTTPS/REST API
-                     │ JWT Authentication
-┌────────────────────▼────────────────────────────────────────┐
-│                   API Gateway (Flask)                        │
-│                   - CORS Middleware                          │
-│                   - JWT Verification                         │
-│                   - Request Validation                       │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────────┐
-│                  Controller Layer                            │
-│  - AuthController                                            │
-│  - DashboardController                                       │
-│  - AnalysisController                                        │
-│  - UploadController                                          │
-│  - VisualizationController                                   │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────────┐
-│                   Service Layer                              │
-│  - LogProcessingService                                      │
-│  - AnomalyDetectionService                                   │
-│  - EnrichmentService                                         │
-│  - StatisticalService                                        │
-│  - LLMService                                                │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────────┐
-│                  Repository Layer                            │
-│  - UserRepository                                            │
-│  - LogFileRepository                                         │
-│  - LogEntryRepository                                        │
-│  - AnomalyRepository                                         │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────────────┐
-│                PostgreSQL Database                           │
-│  - users                                                     │
-│  - log_files                                                 │
-│  - log_entries                                               │
-│  - anomalies                                                 │
-└──────────────────────────────────────────────────────────────┘
+
+                    Client (Browser)                          
+                  React + TypeScript                          
+
+                      HTTPS/REST API
+                      JWT Authentication
+
+                   API Gateway (Flask)                        
+                   - CORS Middleware                          
+                   - JWT Verification                         
+                   - Request Validation                       
+
+                     
+
+                  Controller Layer                            
+  - AuthController                                            
+  - DashboardController                                       
+  - AnalysisController                                        
+  - UploadController                                          
+  - VisualizationController                                   
+
+                     
+
+                   Service Layer                              
+  - LogProcessingService                                      
+  - AnomalyDetectionService                                   
+  - EnrichmentService                                         
+  - StatisticalService                                        
+  - LLMService                                                
+
+                     
+
+                  Repository Layer                            
+  - UserRepository                                            
+  - LogFileRepository                                         
+  - LogEntryRepository                                        
+  - AnomalyRepository                                         
+
+                     
+
+                PostgreSQL Database                           
+  - users                                                     
+  - log_files                                                 
+  - log_entries                                               
+  - anomalies                                                 
+
 ```
 
 ## Design Patterns

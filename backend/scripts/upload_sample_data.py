@@ -53,16 +53,16 @@ def register_user():
         )
 
         if response.status_code == 201:
-            print(f"✅ User '{EMAIL}' registered successfully")
+            print(f"User '{EMAIL}' registered successfully")
             return True
         elif response.status_code == 400 and ("already" in response.text.lower() or "registered" in response.text.lower()):
-            print(f"ℹ️  User '{EMAIL}' already exists")
+            print(f"User '{EMAIL}' already exists")
             return True
         else:
-            print(f"❌ Registration failed: {response.status_code} - {response.text}")
+            print(f"Registration failed: {response.status_code} - {response.text}")
             return False
     except Exception as e:
-        print(f"❌ Registration error: {e}")
+        print(f" Registration error: {e}")
         return False
 
 def login():
@@ -81,14 +81,14 @@ def login():
         
         if response.status_code == 200:
             token = response.json().get('access_token')
-            print(f"✅ Login successful")
+            print(f" Login successful")
             print(f"   Token: {token[:20]}...")
             return token
         else:
-            print(f"❌ Login failed: {response.status_code} - {response.text}")
+            print(f" Login failed: {response.status_code} - {response.text}")
             return None
     except Exception as e:
-        print(f"❌ Login error: {e}")
+        print(f" Login error: {e}")
         return None
 
 def upload_file(token):
@@ -97,7 +97,7 @@ def upload_file(token):
     
     # Check if file exists
     if not os.path.exists(SAMPLE_FILE):
-        print(f"❌ Sample file not found: {SAMPLE_FILE}")
+        print(f" Sample file not found: {SAMPLE_FILE}")
         return None
     
     file_size = os.path.getsize(SAMPLE_FILE)
@@ -124,15 +124,15 @@ def upload_file(token):
             log_file = result.get('log_file', {})
             file_id = log_file.get('id')
             log_count = log_file.get('log_count', 0)
-            print(f"✅ Upload successful!")
+            print(f" Upload successful!")
             print(f"   File ID: {file_id}")
             print(f"   Logs parsed: {log_count}")
             return file_id
         else:
-            print(f"❌ Upload failed: {response.status_code} - {response.text}")
+            print(f" Upload failed: {response.status_code} - {response.text}")
             return None
     except Exception as e:
-        print(f"❌ Upload error: {e}")
+        print(f" Upload error: {e}")
         return None
 
 def check_anomalies(token, file_id):
@@ -160,17 +160,17 @@ def check_anomalies(token, file_id):
                 severity = anomaly.get('severity', 'unknown')
                 severity_counts[severity] = severity_counts.get(severity, 0) + 1
             
-            print(f"✅ Anomaly detection complete!")
+            print(f" Anomaly detection complete!")
             print(f"   Total anomalies: {total}")
             for severity, count in sorted(severity_counts.items()):
                 print(f"   - {severity.capitalize()}: {count}")
             
             return total
         else:
-            print(f"❌ Failed to fetch anomalies: {response.status_code}")
+            print(f" Failed to fetch anomalies: {response.status_code}")
             return 0
     except Exception as e:
-        print(f"❌ Error checking anomalies: {e}")
+        print(f" Error checking anomalies: {e}")
         return 0
 
 def check_llm_status(token):
@@ -191,30 +191,30 @@ def check_llm_status(token):
             models = status.get('models', [])
             
             if available:
-                print(f"✅ LLM service is available")
+                print(f" LLM service is available")
                 print(f"   Models: {', '.join(models)}")
                 return True
             else:
-                print(f"⚠️  LLM service is not available")
+                print(f"  LLM service is not available")
                 print(f"   Note: High/critical anomalies won't get AI explanations")
                 return False
         else:
-            print(f"⚠️  LLM status check failed: {response.status_code}")
+            print(f"  LLM status check failed: {response.status_code}")
             return False
     except Exception as e:
-        print(f"⚠️  LLM status error: {e}")
+        print(f"  LLM status error: {e}")
         return False
 
 def print_summary(file_id, anomaly_count, llm_available):
     """Print summary and next steps"""
-    print_header("🎉 Upload Complete!")
+    print_header(" Upload Complete!")
     
-    print("📊 Summary:")
+    print(" Summary:")
     print(f"   - File ID: {file_id}")
     print(f"   - Anomalies detected: {anomaly_count}")
     print(f"   - LLM available: {'Yes' if llm_available else 'No'}")
     
-    print("\n🔍 Next Steps:")
+    print("\n Next Steps:")
     print(f"   1. View dashboard: http://localhost:5173")
     print(f"   2. View anomalies: GET /api/anomalies/{file_id}")
     print(f"   3. View visualizations:")
@@ -225,7 +225,7 @@ def print_summary(file_id, anomaly_count, llm_available):
     print(f"      POST /api/llm/investigation-report")
     print(f"      {{'log_file_id': '{file_id}', 'user': 'john.doe'}}")
     
-    print("\n📚 Documentation:")
+    print("\n Documentation:")
     print(f"   - Sample data guide: backend/sample_data/SAMPLE_DATA_GUIDE.md")
     print(f"   - Feature summary: COMPLETE_FEATURE_SUMMARY.md")
     print(f"   - SOC analyst guide: SOC_ANALYST_QUICK_REFERENCE.md")
@@ -234,7 +234,7 @@ def print_summary(file_id, anomaly_count, llm_available):
 
 def main():
     """Main execution"""
-    print_header("🦆 CyberDucky Mini SIEM - Sample Data Upload")
+    print_header(" CyberDucky Mini SIEM - Sample Data Upload")
     
     print("Configuration:")
     print(f"   API URL: {API_BASE_URL}")
@@ -243,19 +243,19 @@ def main():
     
     # Step 1: Register user
     if not register_user():
-        print("\n❌ Failed to register user. Exiting.")
+        print("\n Failed to register user. Exiting.")
         sys.exit(1)
     
     # Step 2: Login
     token = login()
     if not token:
-        print("\n❌ Failed to login. Exiting.")
+        print("\n Failed to login. Exiting.")
         sys.exit(1)
     
     # Step 3: Upload file
     file_id = upload_file(token)
     if not file_id:
-        print("\n❌ Failed to upload file. Exiting.")
+        print("\n Failed to upload file. Exiting.")
         sys.exit(1)
     
     # Step 4: Check anomalies
@@ -267,16 +267,16 @@ def main():
     # Print summary
     print_summary(file_id, anomaly_count, llm_available)
     
-    print("✅ All done! Your SIEM is ready for analysis.")
+    print(" All done! Your SIEM is ready for analysis.")
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print("\n\n⚠️  Upload cancelled by user.")
+        print("\n\n  Upload cancelled by user.")
         sys.exit(1)
     except Exception as e:
-        print(f"\n\n❌ Unexpected error: {e}")
+        print(f"\n\n Unexpected error: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

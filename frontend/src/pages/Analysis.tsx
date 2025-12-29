@@ -75,7 +75,7 @@ const Analysis: React.FC = () => {
     try {
       const data = await visualizationApi.getAllVisualizations(logFileId);
       if (data) {
-        console.log('📊 Visualization data received:', data);
+        console.log(' Visualization data received:', data);
         setVisualizations(data);
       }
     } catch (err: any) {

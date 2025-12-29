@@ -1,4 +1,4 @@
-# 📊 Comprehensive Zscaler Sample Data Guide
+#  Comprehensive Zscaler Sample Data Guide
 
 **File:** `comprehensive_zscaler_sample.csv`  
 **Total Events:** 221  
@@ -7,17 +7,17 @@
 
 ---
 
-## 🎯 Purpose
+##  Purpose
 
 This sample dataset is designed to trigger **ALL** anomaly detection methods and populate **ALL** visualizations in the CyberDucky Mini SIEM. It contains realistic threat scenarios for SOC analyst training and system demonstration.
 
 ---
 
-## 🚨 Anomalies Triggered
+##  Anomalies Triggered
 
 ### 1. Rule-Based Anomalies (7 Methods)
 
-#### ✅ High-Risk Domain Access (Critical)
+####  High-Risk Domain Access (Critical)
 **Lines:** 9-13, 54-63  
 **User:** john.doe  
 **Details:**
@@ -28,7 +28,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 15+ critical severity
 
-#### ✅ Unusual Data Upload (High)
+####  Unusual Data Upload (High)
 **Lines:** 14, 64, 111  
 **Users:** jane.smith, grace.taylor  
 **Details:**
@@ -38,7 +38,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 3 high severity
 
-#### ✅ Multiple Blocked Requests (Medium)
+####  Multiple Blocked Requests (Medium)
 **Lines:** 9-13 (john.doe - 6 blocks), 54-63 (john.doe - 11 blocks), 139-150 (malicious.actor - 12 blocks)  
 **Details:**
 - john.doe: 17 total blocked requests (phishing + C2 + malware)
@@ -46,7 +46,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 2+ medium severity
 
-#### ✅ Suspicious User Agent (Medium)
+####  Suspicious User Agent (Medium)
 **Lines:** 54-63 (curl/7.68.0), 139-150 (python-requests/2.28.0)  
 **Users:** john.doe, malicious.actor  
 **Details:**
@@ -55,7 +55,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 23+ medium severity (11 curl + 12 python-requests)
 
-#### ✅ Off-Hours Activity (Low)
+####  Off-Hours Activity (Low)
 **Lines:** 100-114  
 **Users:** All users  
 **Details:**
@@ -65,7 +65,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 15+ low severity
 
-#### ✅ Rapid Successive Requests (Medium)
+####  Rapid Successive Requests (Medium)
 **Lines:** 66-79 (suspicious.user - 15 requests in 46 seconds)  
 **Details:**
 - suspicious.user making 15 requests to gmail.com in under 1 minute
@@ -73,7 +73,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 1+ medium severity
 
-#### ✅ Threat Category Detection (Critical)
+####  Threat Category Detection (Critical)
 **Lines:** 9-13 (Phishing), 54-63 (Botnet/C2), 13 (Malware), 201 (Spyware)  
 **Users:** john.doe  
 **Details:**
@@ -88,7 +88,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 ### 2. Statistical Anomalies (7 Methods)
 
-#### ✅ Unusual Requests per IP (Critical/High/Medium)
+####  Unusual Requests per IP (Critical/High/Medium)
 **IP:** 10.0.0.50 (suspicious.user), 198.51.100.75 (malicious.actor), 192.168.1.100 (john.doe)  
 **Details:**
 - suspicious.user: 15 requests in 46 seconds (Z-score >> 3)
@@ -97,7 +97,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 3+ (critical/high severity based on Z-score)
 
-#### ✅ User Risk Score Spike (High)
+####  User Risk Score Spike (High)
 **Users:** john.doe, jane.smith, grace.taylor  
 **Details:**
 - john.doe: Risk jumps from 10-20 (normal) to 95-99 (phishing/malware)
@@ -106,7 +106,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 3+ high severity
 
-#### ✅ Data Upload Anomaly (High)
+####  Data Upload Anomaly (High)
 **Lines:** 14, 64, 111  
 **Details:**
 - 50MB, 100MB, 150MB uploads (all in 99th percentile)
@@ -114,7 +114,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 3 high severity
 
-#### ✅ New Domains Anomaly (Medium)
+####  New Domains Anomaly (Medium)
 **User:** john.doe  
 **Lines:** 161-180  
 **Details:**
@@ -124,7 +124,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 1 medium severity
 
-#### ✅ Persistent High Risk (Critical)
+####  Persistent High Risk (Critical)
 **User:** john.doe  
 **Lines:** 54-63  
 **Details:**
@@ -133,7 +133,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 1 critical severity
 
-#### ✅ Burst of Blocked Requests (High)
+####  Burst of Blocked Requests (High)
 **Users:** john.doe, malicious.actor  
 **Details:**
 - john.doe: 11 blocked requests in 10 minutes (C2 burst)
@@ -141,7 +141,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 2 high severity
 
-#### ✅ Risk Trend Correlation (Medium)
+####  Risk Trend Correlation (Medium)
 **User:** john.doe  
 **Details:**
 - john.doe's risk trend diverges significantly from peer group (Engineering dept)
@@ -153,7 +153,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 ### 3. Cross-Source Anomalies (5 Methods)
 
-#### ✅ Impossible Travel (Critical)
+####  Impossible Travel (Critical)
 **User:** john.doe  
 **Lines:** 125-127  
 **Details:**
@@ -163,7 +163,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 1 critical severity
 
-#### ✅ Brute Force Detection (High)
+####  Brute Force Detection (High)
 **User:** malicious.actor  
 **Lines:** 139-150  
 **Details:**
@@ -172,7 +172,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 1 high severity
 
-#### ✅ Data Exfiltration (Critical)
+####  Data Exfiltration (Critical)
 **Users:** jane.smith, grace.taylor  
 **Lines:** 64, 111  
 **Details:**
@@ -181,13 +181,13 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 **Expected Anomalies:** 2 critical severity
 
-#### ✅ Lateral Movement (High)
+####  Lateral Movement (High)
 **Note:** Not explicitly triggered in this dataset (requires access to multiple internal IPs)  
 **Workaround:** Can be simulated by adding events with multiple destination IPs in short time
 
 **Expected Anomalies:** 0 (not in current dataset)
 
-#### ✅ Privilege Escalation (Critical)
+####  Privilege Escalation (Critical)
 **Note:** Not explicitly triggered in this dataset (requires admin actions after normal user activity)  
 **Workaround:** Can be simulated by adding admin actions for a user
 
@@ -195,9 +195,9 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 ---
 
-## 📈 Visualizations Populated
+##  Visualizations Populated
 
-### 1. Risk Score Trendline ✅
+### 1. Risk Score Trendline 
 **Users:** All users, especially john.doe, jane.smith, grace.taylor  
 **Data Points:** 221 events over 33 hours  
 **Features:**
@@ -207,7 +207,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 - Upper/lower control limits (±2σ bands)
 - Visible spikes for john.doe (phishing, C2, malware)
 
-### 2. Z-Score Heatmap ✅
+### 2. Z-Score Heatmap 
 **Dimensions:** 11 users × 33 hourly buckets  
 **Metrics:** risk_score, upload_bytes, request_count  
 **Features:**
@@ -216,7 +216,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 - Light colors for normal users
 - Time-based patterns visible (off-hours activity)
 
-### 3. Boxplots per User ✅
+### 3. Boxplots per User 
 **Users:** All 11 users  
 **Metrics:** risk_score, upload_bytes, request_count  
 **Features:**
@@ -225,7 +225,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 - grace.taylor: Outlier at 55 (off-hours upload)
 - Normal users: Tight distributions (10-25 range)
 
-### 4. Anomaly Scatter Plot ✅
+### 4. Anomaly Scatter Plot 
 **Axes:** X=risk_score, Y=upload_bytes  
 **Color:** Combined anomaly score  
 **Features:**
@@ -233,7 +233,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 - High-risk, low-upload: john.doe (95-99, 0 bytes) - phishing/malware
 - Clusters of normal activity (10-25, 0-4MB)
 
-### 5. Density Plot ✅
+### 5. Density Plot 
 **Metrics:** risk_score distribution  
 **Comparison:** Normal vs. john.doe  
 **Features:**
@@ -241,7 +241,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 - john.doe distribution: Bimodal (normal 10-20, attack 95-99)
 - KDE curves show clear separation
 
-### 6. Control Chart ✅
+### 6. Control Chart 
 **Metric:** risk_score over time  
 **Features:**
 - Center line (CL): ~18 (mean)
@@ -249,7 +249,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 - Lower control limit (LCL): ~5 (mean - 2σ)
 - Out-of-control points: john.doe (95-99), jane.smith (65), grace.taylor (55)
 
-### 7. Timeline Analysis ✅
+### 7. Timeline Analysis 
 **Users:** All users, especially john.doe  
 **Features:**
 - Event timeline with anomaly markers
@@ -260,7 +260,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 ---
 
-## 🔍 Investigation Scenarios
+##  Investigation Scenarios
 
 ### Scenario 1: Compromised Account (john.doe)
 **Timeline:**
@@ -326,7 +326,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 ---
 
-## 📊 Expected Metrics
+##  Expected Metrics
 
 ### Anomaly Counts (Estimated)
 - **Critical:** 35-40 (phishing, C2, malware, spyware, impossible travel, exfiltration)
@@ -354,7 +354,7 @@ This sample dataset is designed to trigger **ALL** anomaly detection methods and
 
 ---
 
-## 🚀 How to Use
+##  How to Use
 
 ### 1. Upload the Sample Data
 ```bash
@@ -383,7 +383,7 @@ curl -X POST http://localhost:5000/api/upload \
 
 ---
 
-## 📝 Notes
+##  Notes
 
 - **Realistic Data:** All events use realistic timestamps, IPs, domains, and user agents
 - **Diverse Threats:** Covers phishing, malware, C2, exfiltration, brute force, reconnaissance

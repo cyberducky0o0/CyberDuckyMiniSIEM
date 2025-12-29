@@ -4,9 +4,9 @@ Welcome to the CyberDucky Mini SIEM documentation! This folder contains comprehe
 
 ---
 
-## 📚 Documentation Structure
+##  Documentation Structure
 
-### 🏗️ Architecture
+###  Architecture
 
 **[SYSTEM_ARCHITECTURE.md](architecture/SYSTEM_ARCHITECTURE.md)**
 - High-level system architecture
@@ -25,7 +25,7 @@ Welcome to the CyberDucky Mini SIEM documentation! This folder contains comprehe
 
 ---
 
-### 📖 Guides
+###  Guides
 
 **[SOC_ANALYST_GUIDE.md](guides/SOC_ANALYST_GUIDE.md)**
 - Quick start for SOC analysts
@@ -62,7 +62,7 @@ Welcome to the CyberDucky Mini SIEM documentation! This folder contains comprehe
 
 ---
 
-### 🚀 Deployment
+###  Deployment
 
 **[DOCKER_DEPLOYMENT.md](deployment/DOCKER_DEPLOYMENT.md)**
 - Docker Compose configuration
@@ -75,7 +75,7 @@ Welcome to the CyberDucky Mini SIEM documentation! This folder contains comprehe
 
 ---
 
-## 🎯 Quick Links by Role
+##  Quick Links by Role
 
 ### For SOC Analysts
 
@@ -120,16 +120,16 @@ Welcome to the CyberDucky Mini SIEM documentation! This folder contains comprehe
 
 ---
 
-## 📋 Documentation Roadmap
+##  Documentation Roadmap
 
 ### Current Documentation (v1.0)
 
-- ✅ System Architecture
-- ✅ SOC Analyst Guide
-- ✅ Parser Guide
-- ✅ Anomaly Detection Guide
-- ✅ Sample Data Guide
-- ✅ Docker Deployment Guide
+-  System Architecture
+-  SOC Analyst Guide
+-  Parser Guide
+-  Anomaly Detection Guide
+-  Sample Data Guide
+-  Docker Deployment Guide
 
 ### Future Documentation (Planned)
 
@@ -142,7 +142,7 @@ Welcome to the CyberDucky Mini SIEM documentation! This folder contains comprehe
 
 ---
 
-## 🤝 Contributing to Documentation
+##  Contributing to Documentation
 
 If you find errors or want to improve the documentation:
 
@@ -159,7 +159,7 @@ If you find errors or want to improve the documentation:
 
 ---
 
-## 📧 Support
+##  Support
 
 For questions not covered in the documentation:
 

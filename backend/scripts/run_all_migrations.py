@@ -82,12 +82,12 @@ def run_migration_file(migration_file):
             except Exception as e:
                 # If it's an "already exists" error, that's okay
                 if 'already exists' in str(e).lower() or 'duplicate' in str(e).lower():
-                    logger.info(f"  ⚠️  Skipping (already exists): {str(e)[:100]}")
+                    logger.info(f"    Skipping (already exists): {str(e)[:100]}")
                 else:
                     raise
 
     db.session.commit()
-    logger.info(f"✅ Migration completed: {os.path.basename(migration_file)}")
+    logger.info(f"Migration completed: {os.path.basename(migration_file)}")
 
 def run_all_migrations():
     """Run all migrations"""
@@ -121,16 +121,16 @@ def run_all_migrations():
                 migration_path = os.path.join(migrations_dir, migration_file)
                 
                 if not os.path.exists(migration_path):
-                    logger.warning(f"⚠️  Migration file not found: {migration_file}")
+                    logger.warning(f"  Migration file not found: {migration_file}")
                     continue
                 
                 # Check if migration is needed
                 if migration_file == 'add_normalized_events.sql' and normalized_events_exists:
-                    logger.info(f"⏭️  Skipping {migration_file} (table already exists)")
+                    logger.info(f"Skipping {migration_file} (table already exists)")
                     continue
-                
+
                 if migration_file == 'add_normalized_event_id_to_anomalies.sql' and normalized_event_id_exists:
-                    logger.info(f"⏭️  Skipping {migration_file} (column already exists)")
+                    logger.info(f"Skipping {migration_file} (column already exists)")
                     continue
                 
                 run_migration_file(migration_path)
@@ -143,39 +143,39 @@ def run_all_migrations():
             # Check normalized_events table
             if table_exists('normalized_events'):
                 result = db.session.execute(db.text("""
-                    SELECT COUNT(*) FROM information_schema.columns 
+                    SELECT COUNT(*) FROM information_schema.columns
                     WHERE table_name = 'normalized_events'
                 """))
                 col_count = result.scalar()
-                logger.info(f"✅ normalized_events table exists with {col_count} columns")
+                logger.info(f"normalized_events table exists with {col_count} columns")
             else:
-                logger.error("❌ normalized_events table does not exist!")
+                logger.error("normalized_events table does not exist!")
                 return False
-            
+
             # Check normalized_event_id column
             if column_exists('anomalies', 'normalized_event_id'):
                 result = db.session.execute(db.text("""
-                    SELECT data_type, is_nullable 
-                    FROM information_schema.columns 
-                    WHERE table_name = 'anomalies' 
+                    SELECT data_type, is_nullable
+                    FROM information_schema.columns
+                    WHERE table_name = 'anomalies'
                     AND column_name = 'normalized_event_id'
                 """))
                 row = result.fetchone()
-                logger.info(f"✅ anomalies.normalized_event_id column exists")
+                logger.info(f"anomalies.normalized_event_id column exists")
                 logger.info(f"   - Type: {row[0]}")
                 logger.info(f"   - Nullable: {row[1]}")
             else:
-                logger.error("❌ anomalies.normalized_event_id column does not exist!")
+                logger.error("anomalies.normalized_event_id column does not exist!")
                 return False
-            
+
             logger.info("\n" + "="*80)
-            logger.info("✅ ALL MIGRATIONS COMPLETED SUCCESSFULLY!")
+            logger.info("ALL MIGRATIONS COMPLETED SUCCESSFULLY!")
             logger.info("="*80)
             
             return True
             
         except Exception as e:
-            logger.error(f"\n❌ Migration failed: {e}")
+            logger.error(f"\nMigration failed: {e}")
             import traceback
             traceback.print_exc()
             db.session.rollback()

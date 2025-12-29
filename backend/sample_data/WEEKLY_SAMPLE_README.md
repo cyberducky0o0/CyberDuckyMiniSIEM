@@ -1,4 +1,4 @@
-# 📅 Weekly Zscaler Sample Log File
+#  Weekly Zscaler Sample Log File
 
 ## Overview
 
@@ -10,7 +10,7 @@
 
 ---
 
-## 📊 Dataset Characteristics
+##  Dataset Characteristics
 
 ### Time Distribution
 - **7 full days** of continuous logging
@@ -40,32 +40,32 @@
 
 ---
 
-## 🚨 Embedded Anomaly Patterns
+##  Embedded Anomaly Patterns
 
 This sample file includes **4 realistic attack patterns** for testing anomaly detection:
 
-### 1. **Data Exfiltration Attempt** 🔴
+### 1. **Data Exfiltration Attempt** 
 - **When:** Day 3 (Nov 8), 11:15 PM - 11:35 PM
 - **Who:** john.doe (Engineering)
 - **What:** 20 consecutive POST requests to data-exfil-server.com
 - **Risk Score:** 97 (Critical)
 - **Detection:** Unusual late-night activity, high-risk domain, repeated blocked attempts
 
-### 2. **Phishing Campaign** 🎣
+### 2. **Phishing Campaign** 
 - **When:** Day 4 (Nov 9), 9:30 AM - 10:00 AM
 - **Who:** Multiple users (organization-wide)
 - **What:** 15 attempts to access malicious-phishing-site.com
 - **Risk Score:** 95 (Critical)
 - **Detection:** Burst of phishing attempts, multiple users affected
 
-### 3. **Unusual Upload Volume** 📤
+### 3. **Unusual Upload Volume** 
 - **When:** Day 5 (Nov 10), 2:00 PM - 2:30 PM
 - **Who:** jane.smith (Finance)
 - **What:** 30 large file uploads to cloud storage (5-50 MB each)
 - **Risk Score:** 25-30 (Medium)
 - **Detection:** Abnormal upload frequency, large data volume
 
-### 4. **C2 Beaconing** 🤖
+### 4. **C2 Beaconing** 
 - **When:** Day 6 (Nov 11), 8:00 AM - 8:00 PM (12 hours)
 - **Who:** charlie.brown (IT)
 - **What:** 48 POST requests to c2-command-server.org (every 15 minutes)
@@ -74,7 +74,7 @@ This sample file includes **4 realistic attack patterns** for testing anomaly de
 
 ---
 
-## 🎯 Use Cases
+##  Use Cases
 
 ### For SOC Analysts
 - **Time Series Analysis:** Visualize activity patterns over a full week
@@ -91,7 +91,7 @@ This sample file includes **4 realistic attack patterns** for testing anomaly de
 
 ---
 
-## 📈 Expected Detection Results
+##  Expected Detection Results
 
 When this file is uploaded and analyzed, you should see:
 
@@ -118,7 +118,7 @@ When this file is uploaded and analyzed, you should see:
 
 ---
 
-## 🔧 How to Use
+##  How to Use
 
 ### Upload via UI
 1. Navigate to **Upload** page
@@ -135,7 +135,7 @@ When this file is uploaded and analyzed, you should see:
 
 ---
 
-## 📝 Notes
+##  Notes
 
 - All timestamps are in **2025-11-06 to 2025-11-12** range
 - All IP addresses are **realistic but fictional**
@@ -145,16 +145,16 @@ When this file is uploaded and analyzed, you should see:
 
 ---
 
-## 🎨 Visualization Highlights
+##  Visualization Highlights
 
 This dataset is specifically designed to showcase:
 
-✅ **Anomaly Time Series** - Clear spikes on Days 3, 4, 5, 6  
-✅ **Event Timeline** - 7 days of hourly/daily buckets  
-✅ **Risk Trendline** - EWMA showing risk elevation  
-✅ **Requests Per Minute** - Burst detection patterns  
-✅ **User Activity Heatmap** - Multi-user behavior  
-✅ **Threat Distribution** - Diverse threat types  
+ **Anomaly Time Series** - Clear spikes on Days 3, 4, 5, 6  
+ **Event Timeline** - 7 days of hourly/daily buckets  
+ **Risk Trendline** - EWMA showing risk elevation  
+ **Requests Per Minute** - Burst detection patterns  
+ **User Activity Heatmap** - Multi-user behavior  
+ **Threat Distribution** - Diverse threat types  
 
 ---
 

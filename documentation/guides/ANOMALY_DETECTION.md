@@ -470,12 +470,12 @@ Urgency: CRITICAL - Respond within 15 minutes
 
 | Method | Speed | Accuracy | Use Case | Confidence |
 |--------|-------|----------|----------|------------|
-| **Rule-Based** | ⚡⚡⚡ Fast | ⭐⭐⭐⭐⭐ High | Known threats | 90-95% |
-| **Z-Score** | ⚡⚡ Medium | ⭐⭐⭐⭐ Good | Outliers | 70-85% |
-| **Percentile** | ⚡⚡ Medium | ⭐⭐⭐⭐ Good | Extreme values | 75-85% |
-| **EWMA** | ⚡⚡ Medium | ⭐⭐⭐ Medium | Trends | 65-80% |
-| **Burst** | ⚡⚡ Medium | ⭐⭐⭐⭐ Good | Spikes | 70-85% |
-| **LLM** | ⚡ Slow | ⭐⭐⭐⭐ Good | Context | 60-75% |
+| **Rule-Based** |  Fast |  High | Known threats | 90-95% |
+| **Z-Score** |  Medium |  Good | Outliers | 70-85% |
+| **Percentile** |  Medium |  Good | Extreme values | 75-85% |
+| **EWMA** |  Medium |  Medium | Trends | 65-80% |
+| **Burst** |  Medium |  Good | Spikes | 70-85% |
+| **LLM** |  Slow |  Good | Context | 60-75% |
 
 ---
 

@@ -1,4 +1,4 @@
-# CyberDucky Mini SIEM 🦆🔒
+# CyberDucky Mini SIEM
 
 **A SOC Analyst-Focused Security Information and Event Management System**
 
@@ -6,14 +6,14 @@ CyberDucky Mini SIEM is a full-stack web application designed specifically for S
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 1. [Overview](#overview)
 2. [Key Features](#key-features)
 3. [Architecture](#architecture)
 4. [Technology Stack](#technology-stack)
 5. [Quick Start](#quick-start)
-6. [Production Deployment](#-production-deployment)
+6. [Production Deployment](#production-deployment)
 7. [How It Works](#how-it-works)
 8. [Design Decisions](#design-decisions)
 9. [Parser Architecture](#parser-architecture)
@@ -24,7 +24,7 @@ CyberDucky Mini SIEM is a full-stack web application designed specifically for S
 
 ---
 
-## 🎯 Overview
+## Overview
 
 CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
 
@@ -43,9 +43,9 @@ CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 🔍 Multi-Method Threat Detection
+### Multi-Method Threat Detection
 
 1. **Rule-Based Detection**
    - Malware detection (malware, virus, trojan, ransomware)
@@ -65,7 +65,7 @@ CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
    - Natural language threat descriptions
    - Confidence scoring
 
-### 📊 Advanced Visualizations
+### Advanced Visualizations
 
 - **Anomaly Time Series** - Track anomalies over time
 - **Risk Score Trendline** - Monitor risk trends with EWMA
@@ -75,14 +75,14 @@ CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
 - **Top Threats** - Most frequent threats
 - **User Activity Heatmap** - Activity patterns by user and time
 
-### 🎛️ SOC Analyst Dashboard
+### SOC Analyst Dashboard
 
 - **Overview Dashboard** - Aggregated metrics across all log files
   - Total log files, entries, anomalies, threats
   - Top risky users, IPs, and threats
   - Anomaly trends over time
   - Advanced analytics section
-  
+
 - **Unified Analysis** - Drill-down investigation
   - Filter by username, IP, threat name, category, risk score
   - View all matching entries across all files
@@ -94,7 +94,7 @@ CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
   - All visualizations for single file
   - Export capabilities
 
-### 🔐 Security Features
+### Security Features
 
 - JWT-based authentication
 - User isolation (users only see their own data)
@@ -104,52 +104,52 @@ CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ### High-Level Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                         Frontend                             │
-│  React + TypeScript + Vite + Tailwind CSS                   │
-│  - Overview Dashboard (aggregated metrics)                   │
-│  - Unified Analysis (cross-file investigation)              │
-│  - File Analysis (single file deep-dive)                    │
-│  - Upload Logs                                              │
-└────────────────────┬────────────────────────────────────────┘
-                     │ HTTP/REST API
-                     │ (JWT Authentication)
-┌────────────────────▼────────────────────────────────────────┐
-│                         Backend                              │
-│  Flask + SQLAlchemy + PostgreSQL                            │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │ Controllers (API Endpoints)                          │  │
-│  │  - Auth, Upload, Dashboard, Analysis, Visualization │  │
-│  └──────────────────┬───────────────────────────────────┘  │
-│  ┌──────────────────▼───────────────────────────────────┐  │
-│  │ Services (Business Logic)                            │  │
-│  │  - Log Parser Service                                │  │
-│  │  - Anomaly Detection Service (Rule + Statistical)    │  │
-│  │  - Statistical Analysis Service                      │  │
-│  │  - Visualization Data Service                        │  │
-│  │  - LLM Service (Ollama Integration)                  │  │
-│  └──────────────────┬───────────────────────────────────┘  │
-│  ┌──────────────────▼───────────────────────────────────┐  │
-│  │ Repositories (Data Access)                           │  │
-│  │  - User, LogFile, LogEntry, Anomaly                  │  │
-│  └──────────────────┬───────────────────────────────────┘  │
-│  ┌──────────────────▼───────────────────────────────────┐  │
-│  │ Models (Database Schema)                             │  │
-│  │  - User, LogFile, LogEntry, Anomaly                  │  │
-│  └──────────────────────────────────────────────────────┘  │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-        ┌────────────┴────────────┬──────────────┐
-        │                         │              │
-┌───────▼────────┐   ┌───────────▼──────┐   ┌──▼─────────┐
-│   PostgreSQL   │   │     Ollama       │   │  Uploads   │
-│   Database     │   │  (LLM Service)   │   │  Volume    │
-└────────────────┘   └──────────────────┘   └────────────┘
+
+                         Frontend                             
+  React + TypeScript + Vite + Tailwind CSS                   
+  - Overview Dashboard (aggregated metrics)                   
+  - Unified Analysis (cross-file investigation)              
+  - File Analysis (single file deep-dive)                    
+  - Upload Logs                                              
+
+                      HTTP/REST API
+                      (JWT Authentication)
+
+                         Backend                              
+  Flask + SQLAlchemy + PostgreSQL                            
+    
+   Controllers (API Endpoints)                            
+    - Auth, Upload, Dashboard, Analysis, Visualization   
+    
+    
+   Services (Business Logic)                              
+    - Log Parser Service                                  
+    - Anomaly Detection Service (Rule + Statistical)      
+    - Statistical Analysis Service                        
+    - Visualization Data Service                          
+    - LLM Service (Ollama Integration)                    
+    
+    
+   Repositories (Data Access)                             
+    - User, LogFile, LogEntry, Anomaly                    
+    
+    
+   Models (Database Schema)                               
+    - User, LogFile, LogEntry, Anomaly                    
+    
+
+                     
+        
+                                               
+      
+   PostgreSQL           Ollama            Uploads   
+   Database          (LLM Service)        Volume    
+      
 ```
 
 ### Design Patterns
@@ -164,7 +164,7 @@ CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
 
 ---
 
-## ��� Technology Stack
+## Technology Stack
 
 ### Backend
 
@@ -202,7 +202,7 @@ CyberDucky Mini SIEM provides SOC analysts with a powerful platform to:
 
 ---
 
-## ��� Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -267,7 +267,7 @@ See [Sample Data Guide](documentation/guides/SAMPLE_DATA.md) for details.
 
 ---
 
-## 🚀 Production Deployment
+## Production Deployment
 
 ### Prerequisites
 
@@ -314,7 +314,7 @@ See [Sample Data Guide](documentation/guides/SAMPLE_DATA.md) for details.
    VITE_API_URL=http://your-domain.com/api
    ```
 
-   **⚠️ SECURITY WARNING:**
+   ** SECURITY WARNING:**
    - **NEVER** use default passwords in production
    - **NEVER** commit `.env` file to version control
    - Generate secrets using: `openssl rand -hex 32`
@@ -477,7 +477,7 @@ docker-compose -f docker-compose.prod.yml logs db
 
 ---
 
-## ��� How It Works
+## How It Works
 
 ### 1. Log Upload and Parsing
 
@@ -754,26 +754,26 @@ Click on "john.doe" → Navigate to /unified-analysis?username=john.doe
 
 ---
 
-## ��� Design Decisions
+## Design Decisions
 
 ### Why These 4 Statistical Methods?
 
-**1. Z-Score Analysis** ⭐⭐⭐⭐⭐
+**1. Z-Score Analysis** 
 - **Chosen because:** Industry standard, easy to understand (3-sigma rule), works well for outlier detection
 - **SOC Value:** Analysts understand "3 standard deviations from normal"
 - **Use Case:** Rate anomalies, unusual behavior
 
-**2. Percentile-Based** ⭐⭐⭐⭐⭐
+**2. Percentile-Based** 
 - **Chosen because:** Simple threshold (top 1%), directly identifies extreme values
 - **SOC Value:** Clear cutoff for "large" uploads/downloads
 - **Use Case:** Data exfiltration detection
 
-**3. EWMA** ⭐⭐⭐⭐
+**3. EWMA** 
 - **Chosen because:** Detects trends and gradual changes, complements Z-score
 - **SOC Value:** Catches slow attacks that build over time
 - **Use Case:** Persistent threats, behavior drift
 
-**4. Burst Detection** ⭐⭐⭐⭐⭐
+**4. Burst Detection** 
 - **Chosen because:** Critical for attack detection (DDoS, brute force)
 - **SOC Value:** Immediate visibility into sudden spikes
 - **Use Case:** Attack patterns, scanning activity
@@ -806,8 +806,7 @@ Click on "john.doe" → Navigate to /unified-analysis?username=john.doe
 
 ---
 
-
-## ��� Parser Architecture
+## Parser Architecture
 
 ### Overview
 
@@ -886,7 +885,7 @@ See [Parser Guide](documentation/guides/PARSER_GUIDE.md) for complete field mapp
 
 ---
 
-## ��� Anomaly Detection
+## Anomaly Detection
 
 ### Detection Methods
 
@@ -1051,7 +1050,7 @@ See [Anomaly Detection Guide](documentation/guides/ANOMALY_DETECTION.md) for det
 
 ---
 
-## ��� API Reference
+## API Reference
 
 ### Authentication
 
@@ -1180,86 +1179,86 @@ Response: 200 OK
 
 ---
 
-## ���️ Development
+## Development
 
 ### Project Structure
 
 ```
 CyberDuckyMiniSIEM/
-├── backend/
-│   ├── app/
-│   │   ├── __init__.py              # Flask app factory
-│   │   ├── config.py                # Configuration
-│   │   ├── models/                  # SQLAlchemy models
-│   │   │   ├── user.py
-│   │   │   ├── log_file.py
-│   │   │   ├── log_entry.py
-│   │   │   └── anomaly.py
-│   │   ├── repositories/            # Data access layer
-│   │   │   ├── user_repository.py
-│   │   │   ├── log_file_repository.py
-│   │   │   ├── log_entry_repository.py
-│   │   │   └── anomaly_repository.py
-│   │   ├── services/                # Business logic
-│   │   │   ├── log_processing_service.py
-│   │   │   ├── anomaly_detection_service.py
-│   │   │   ├── statistical_analysis_service.py
-│   │   │   ├── visualization_data_service.py
-│   │   │   └── llm_service.py
-│   │   ├── parsers/                 # Log parsers
-│   │   │   ├── base_parser.py
-│   │   │   ├── zscaler_parser.py
-│   │   │   └── parser_factory.py
-│   │   └── controllers/             # API endpoints
-│   │       ├── auth_controller.py
-│   │       ├── dashboard_controller.py
-│   │       ├── analysis_controller.py
-│   │       ├── upload_controller.py
-│   │       └── visualization_controller.py
-│   ├── sample_data/                 # Sample logs
-│   ├── requirements.txt             # Python dependencies
-│   ├── Dockerfile
-│   └── run.py                       # Application entry point
-├── frontend/
-│   ├── src/
-│   │   ├── components/              # React components
-│   │   │   ├── MetricsCard.tsx
-│   │   │   ├── MetricsOverview.tsx
-│   │   │   ├── DataTableModal.tsx
-│   │   │   ├── LogEntryDetails.tsx
-│   │   │   ├── NavigationBar.tsx
-│   │   │   └── VisualizationWidgets.tsx
-│   │   ├── pages/                   # Page components
-│   │   │   ├── Login.tsx
-│   │   │   ├── Register.tsx
-│   │   │   ├── OverviewDashboard.tsx
-│   │   │   ├── UnifiedAnalysis.tsx
-│   │   │   ├── Analysis.tsx
-│   │   │   └── UploadLogs.tsx
-│   │   ├── services/                # API services
-│   │   │   └── api.ts
-│   │   ├── types/                   # TypeScript types
-│   │   │   └── index.ts
-│   │   ├── App.tsx                  # Main app component
-│   │   └── main.tsx                 # Entry point
-│   ├── package.json                 # Node dependencies
-│   ├── Dockerfile
-│   └── vite.config.ts               # Vite configuration
-├── documentation/                   # Documentation
-│   ├── README.md                    # Documentation index
-│   ├── architecture/
-│   │   └── SYSTEM_ARCHITECTURE.md
-│   ├── guides/
-│   │   ├── SOC_ANALYST_GUIDE.md
-│   │   ├── PARSER_GUIDE.md
-│   │   ├── ANOMALY_DETECTION.md
-│   │   └── SAMPLE_DATA.md
-│   └── deployment/
-│       └── DOCKER_DEPLOYMENT.md
-├── docker-compose.yml               # Docker orchestration
-├── start-docker.ps1                 # Windows startup script
-├── DATABASE_SCHEMA.sql              # Database schema
-└── README.md                        # This file
+ backend/
+    app/
+       __init__.py              # Flask app factory
+       config.py                # Configuration
+       models/                  # SQLAlchemy models
+          user.py
+          log_file.py
+          log_entry.py
+          anomaly.py
+       repositories/            # Data access layer
+          user_repository.py
+          log_file_repository.py
+          log_entry_repository.py
+          anomaly_repository.py
+       services/                # Business logic
+          log_processing_service.py
+          anomaly_detection_service.py
+          statistical_analysis_service.py
+          visualization_data_service.py
+          llm_service.py
+       parsers/                 # Log parsers
+          base_parser.py
+          zscaler_parser.py
+          parser_factory.py
+       controllers/             # API endpoints
+           auth_controller.py
+           dashboard_controller.py
+           analysis_controller.py
+           upload_controller.py
+           visualization_controller.py
+    sample_data/                 # Sample logs
+    requirements.txt             # Python dependencies
+    Dockerfile
+    run.py                       # Application entry point
+ frontend/
+    src/
+       components/              # React components
+          MetricsCard.tsx
+          MetricsOverview.tsx
+          DataTableModal.tsx
+          LogEntryDetails.tsx
+          NavigationBar.tsx
+          VisualizationWidgets.tsx
+       pages/                   # Page components
+          Login.tsx
+          Register.tsx
+          OverviewDashboard.tsx
+          UnifiedAnalysis.tsx
+          Analysis.tsx
+          UploadLogs.tsx
+       services/                # API services
+          api.ts
+       types/                   # TypeScript types
+          index.ts
+       App.tsx                  # Main app component
+       main.tsx                 # Entry point
+    package.json                 # Node dependencies
+    Dockerfile
+    vite.config.ts               # Vite configuration
+ documentation/                   # Documentation
+    README.md                    # Documentation index
+    architecture/
+       SYSTEM_ARCHITECTURE.md
+    guides/
+       SOC_ANALYST_GUIDE.md
+       PARSER_GUIDE.md
+       ANOMALY_DETECTION.md
+       SAMPLE_DATA.md
+    deployment/
+        DOCKER_DEPLOYMENT.md
+ docker-compose.yml               # Docker orchestration
+ start-docker.ps1                 # Windows startup script
+ DATABASE_SCHEMA.sql              # Database schema
+ README.md                        # This file
 ```
 
 ### Local Development
@@ -1321,7 +1320,7 @@ VITE_API_URL=http://localhost:5000/api
 
 ---
 
-## ��� Documentation
+## Documentation
 
 ### Available Guides
 
@@ -1351,7 +1350,7 @@ VITE_API_URL=http://localhost:5000/api
 
 ---
 
-## ��� Security Considerations
+## Security Considerations
 
 ### Authentication & Authorization
 
@@ -1375,13 +1374,13 @@ VITE_API_URL=http://localhost:5000/api
 
 ---
 
-## ��� License
+## License
 
 This project is for educational and internal use. See LICENSE file for details.
 
 ---
 
-## ��� Acknowledgments
+## Acknowledgments
 
 - **Zscaler** - For NSS Web Log format documentation
 - **Ollama** - For local LLM inference
@@ -1390,7 +1389,7 @@ This project is for educational and internal use. See LICENSE file for details.
 
 ---
 
-## ��� Support
+## Support
 
 For questions or issues:
 1. Check the [documentation](documentation/)
@@ -1399,5 +1398,5 @@ For questions or issues:
 
 ---
 
-**Built with ❤️ for SOC Analysts**
+**Built with  for SOC Analysts**
 

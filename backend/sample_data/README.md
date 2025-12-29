@@ -1,10 +1,10 @@
-# 📊 Sample Data for CyberDucky Mini SIEM
+#  Sample Data for CyberDucky Mini SIEM
 
 This directory contains comprehensive sample Zscaler NSS Web Logs designed to demonstrate all features of the CyberDucky Mini SIEM.
 
 ---
 
-## 📁 Files
+##  Files
 
 ### `comprehensive_zscaler_sample.csv`
 **Purpose:** Complete sample dataset with realistic threat scenarios  
@@ -14,11 +14,11 @@ This directory contains comprehensive sample Zscaler NSS Web Logs designed to de
 **Anomalies:** ~85-105 expected anomalies across all severity levels
 
 **Triggers:**
-- ✅ All 7 rule-based detection methods
-- ✅ All 7 statistical detection methods
-- ✅ 3 of 5 cross-source detection methods
-- ✅ All 7 visualization types
-- ✅ LLM analysis for critical/high anomalies
+-  All 7 rule-based detection methods
+-  All 7 statistical detection methods
+-  3 of 5 cross-source detection methods
+-  All 7 visualization types
+-  LLM analysis for critical/high anomalies
 
 ### `SAMPLE_DATA_GUIDE.md`
 **Purpose:** Detailed documentation of sample data  
@@ -31,7 +31,7 @@ This directory contains comprehensive sample Zscaler NSS Web Logs designed to de
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Option 1: Automated Upload (Recommended)
 
@@ -79,7 +79,7 @@ curl -X POST http://localhost:5000/api/upload \
 
 ---
 
-## 🎯 What You'll See
+##  What You'll See
 
 ### Anomalies Detected
 
@@ -111,7 +111,7 @@ High and critical anomalies will automatically receive AI-powered explanations:
 
 ---
 
-## 👥 User Scenarios
+##  User Scenarios
 
 ### 1. john.doe (Compromised Account) - **HIGH RISK**
 **Activity:**
@@ -162,13 +162,13 @@ High and critical anomalies will automatically receive AI-powered explanations:
 
 ---
 
-## 📈 Expected Metrics
+##  Expected Metrics
 
 ### Detection Coverage
-- **Rule-Based:** 7/7 methods triggered ✅
-- **Statistical:** 7/7 methods triggered ✅
-- **Cross-Source:** 3/5 methods triggered ✅
-- **LLM Analysis:** Automatic for critical/high ✅
+- **Rule-Based:** 7/7 methods triggered 
+- **Statistical:** 7/7 methods triggered 
+- **Cross-Source:** 3/5 methods triggered 
+- **LLM Analysis:** Automatic for critical/high 
 
 ### Data Distribution
 - **Normal Events:** ~130 (59%)
@@ -186,7 +186,7 @@ High and critical anomalies will automatically receive AI-powered explanations:
 
 ---
 
-## 🔍 Investigation Workflows
+##  Investigation Workflows
 
 ### Workflow 1: Investigate Compromised Account
 ```bash
@@ -242,7 +242,7 @@ curl -X GET "http://localhost:5000/api/anomalies/$FILE_ID/severity/critical" \
 
 ---
 
-## 📚 Documentation
+##  Documentation
 
 - **SAMPLE_DATA_GUIDE.md** - Detailed breakdown of sample data
 - **COMPLETE_FEATURE_SUMMARY.md** - Full system feature list
@@ -252,7 +252,7 @@ curl -X GET "http://localhost:5000/api/anomalies/$FILE_ID/severity/critical" \
 
 ---
 
-## 🛠️ Troubleshooting
+##  Troubleshooting
 
 ### Upload Fails
 - Check backend is running: `docker-compose ps`
@@ -276,18 +276,18 @@ curl -X GET "http://localhost:5000/api/anomalies/$FILE_ID/severity/critical" \
 
 ---
 
-## 🎓 Learning Objectives
+##  Learning Objectives
 
 After uploading and analyzing this sample data, you should be able to:
 
-1. ✅ Identify compromised accounts using multiple indicators
-2. ✅ Detect data exfiltration patterns
-3. ✅ Recognize insider threat behaviors
-4. ✅ Investigate brute force attacks
-5. ✅ Use visualizations for threat hunting
-6. ✅ Leverage AI for anomaly explanation
-7. ✅ Generate investigation reports
-8. ✅ Correlate events across multiple dimensions
+1.  Identify compromised accounts using multiple indicators
+2.  Detect data exfiltration patterns
+3.  Recognize insider threat behaviors
+4.  Investigate brute force attacks
+5.  Use visualizations for threat hunting
+6.  Leverage AI for anomaly explanation
+7.  Generate investigation reports
+8.  Correlate events across multiple dimensions
 
 ---
 

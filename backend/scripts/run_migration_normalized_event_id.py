@@ -46,29 +46,29 @@ def run_migration():
                     db.session.execute(db.text(statement))
             
             db.session.commit()
-            logger.info("✅ Migration completed successfully!")
-            
+            logger.info("Migration completed successfully!")
+
             # Verify the column exists
             result = db.session.execute(db.text("""
-                SELECT column_name, data_type, is_nullable 
-                FROM information_schema.columns 
-                WHERE table_name = 'anomalies' 
+                SELECT column_name, data_type, is_nullable
+                FROM information_schema.columns
+                WHERE table_name = 'anomalies'
                 AND column_name = 'normalized_event_id'
             """))
-            
+
             row = result.fetchone()
             if row:
-                logger.info(f"✅ Verified: Column 'normalized_event_id' exists")
+                logger.info(f"Verified: Column 'normalized_event_id' exists")
                 logger.info(f"   - Type: {row[1]}")
                 logger.info(f"   - Nullable: {row[2]}")
             else:
-                logger.error("❌ Column 'normalized_event_id' not found after migration!")
+                logger.error("Column 'normalized_event_id' not found after migration!")
                 return False
-            
+
             return True
-            
+
         except Exception as e:
-            logger.error(f"❌ Migration failed: {e}")
+            logger.error(f"Migration failed: {e}")
             db.session.rollback()
             return False
 
